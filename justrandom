@@ -1,0 +1,45 @@
+    $(document).ready(function () {
+        $('.edit-btn').click(function () {
+            var id = $(this).data('id');
+            $.get("/deploy/" + id + "/edit", function (data) {
+                $('#edit_id').val(data.id);
+                $('#surname').val(data.surname);
+                $('#othername').val(data.othername);
+                $('#gender').val(data.gender);
+                $('#currentrole').val(data.currentrole);
+                $('#editModal').modal('show');
+
+                $.ajax({
+                type: "GET",
+                url: "/edit/" + id,
+                success: function (response) {
+                console.log(
+                    response
+                );
+                }   // Here you can update the table row with the updated data
+                }),
+            });
+
+            
+        });
+
+        $('#editForm').submit(function (e) {
+            e.preventDefault();
+            var id = $('#edit_id').val();
+            $.ajax({
+                type: "PUT",
+                url: "/deploy/" + id,
+                data: $(this).serialize(),
+                success: function (response) {
+                    $('#editModal').modal('hide');
+                    // Here you can update the table row with the updated data
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                    // Here you can display validation errors, if any
+                }
+            });
+        });
+
+        
+    });

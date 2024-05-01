@@ -1,0 +1,14 @@
+/* Additional custom styles can be added here */
+
+.delete-btn-container {
+    position: relative;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: -40px;
+    /* Adjust as needed */
+    right: 0;
+}
